@@ -1,4 +1,4 @@
-## MyPi Pizza order generator
+## MyPi Pizza Order Generator Mobile App
 
 This is a mobile app that generates ideal pizza orders for a large group of people. It is designed to be used by a host who creates an order, and then the guests can join the order and add their own toppings preferences. The host can then generate a pizza order that is ideal for the group.
 
