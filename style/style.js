@@ -45,4 +45,42 @@ export default StyleSheet.create({
         color: 'white',
         fontFamily: 'Arial',
     },
+    textInput: {
+        height: 70,
+        width: 250,
+        margin: 12,
+        borderWidth: 1,
+        color: 'white',
+        borderColor: 'white',
+        borderRadius: 10,
+        padding: 10,
+        fontFamily: 'Arial',
+        fontSize: 20,
+    },
+    title: {
+        fontSize: 40,
+        color: '#E1A52F',
+        fontFamily: 'Arial',
+        // center the text
+        textAlign: 'center',
+        // limit the width of the text
+        width: 400,
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    subtitle: {
+        fontSize: 20,
+        color: '#E1A52F',
+        fontFamily: 'Arial',
+        // center the text
+        textAlign: 'center',
+        // limit the width of the text
+        width: 300,
+        marginBottom: 20,
+    },
+    icon: {
+        width: 160,
+        height: 160,
+        marginBottom: 20,
+    }
 });
