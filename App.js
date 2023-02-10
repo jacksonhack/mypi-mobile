@@ -4,6 +4,7 @@ import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen.js';
+import AdminScreen from './src/screens/AdminScreen.js';
 import style from './style/style.js';
 
 function DetailsScreen({ navigation }) {
@@ -54,6 +55,16 @@ function App() {
             fontfaimly: 'Arial',
             fontSize: 20,
           }
+        }}/>
+        <Stack.Screen
+        name="Admin Screen"
+        component={AdminScreen}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#000000',
+          },
+          headerBackVisible: false,
         }}/>
       </Stack.Navigator>
     </NavigationContainer>

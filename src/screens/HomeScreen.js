@@ -17,7 +17,7 @@ function HomeScreen({ navigation }) {
         <Pressable style={style.yellowButton} onPress={() => navigation.navigate('Details')}>
             <Text style={style.buttonText}>Join Order</Text>
         </Pressable>
-        <Pressable style={style.redButton} onPress={() => navigation.navigate('Details')}>
+        <Pressable style={style.redButton} onPress={() => navigation.navigate('Admin Screen')}>
             <Text style={style.buttonText}>Create Order</Text>
         </Pressable>
       </View>

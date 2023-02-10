@@ -10,12 +10,43 @@ export default StyleSheet.create({
         flex: 1,
         // center the content
         alignItems: 'center',
+        // add some padding
+        paddingBottom: 50,
+    },
+    userListContainter: {
+        // clear background
+        backgroundColor: 'transparent',
+        // fill 60% of the screen
+        flex: 0.1,
+        // left align the content
+        alignItems: 'flex-start',
+        height: 100,
+    },
+    userList: {
+        // dark grey background
+        backgroundColor: '#1E1E1E',
+        // add some padding
+        padding: 20,
+        // add some margin
+        margin: 10,
+        flexGrow: 0,
+        maxHeight: 300,
+        minHeight: 300,
+        minWidth: 300,
+        maxWidth: 300
+    },
+    userName: {
+        fontSize: 16,
+        color: 'white',
+        fontFamily: 'Arial',
+        // align the text to the left
+        textAlign: 'left',
     },
     yellowButton: {
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 26,
-        paddingHorizontal: 60,
+        paddingHorizontal: 10,
         borderRadius: 50,
         elevation: 3,
         backgroundColor: '#E1A52F',
@@ -28,7 +59,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 26,
-        paddingHorizontal: 60,
+        paddingHorizontal: 10,
         borderRadius: 50,
         elevation: 3,
         backgroundColor: '#9E3737',
@@ -77,6 +108,15 @@ export default StyleSheet.create({
         // limit the width of the text
         width: 300,
         marginBottom: 20,
+    },
+    usersHeader: {
+        fontSize: 22,
+        color: '#E1A52F',
+        fontFamily: 'Arial',
+        // align the text to the left
+        textAlign: 'left',
+        // add some padding
+        paddingLeft: 10,
     },
     icon: {
         width: 160,
