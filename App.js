@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen.js';
 import AdminScreen from './src/screens/AdminScreen.js';
 import style from './style/style.js';
+import MemberScreen from './src/screens/MemberScreen.js';
 
 function DetailsScreen({ navigation }) {
   return (
@@ -65,6 +66,20 @@ function App() {
             backgroundColor: '#000000',
           },
           headerBackVisible: false,
+        }}/>
+        <Stack.Screen
+        name="Member Screen"
+        component={MemberScreen}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#000000',
+          },
+          headerBackTitle : 'Back',
+          headerBackTitleStyle: {
+            fontfaimly: 'Arial',
+            fontSize: 20,
+          }
         }}/>
       </Stack.Navigator>
     </NavigationContainer>

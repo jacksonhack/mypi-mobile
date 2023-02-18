@@ -24,7 +24,7 @@ export default StyleSheet.create({
     },
     userList: {
         // dark grey background
-        backgroundColor: '#1E1E1E',
+        backgroundColor: '#1c1c1c',
         // add some padding
         padding: 20,
         // add some margin
@@ -34,6 +34,35 @@ export default StyleSheet.create({
         minHeight: 300,
         minWidth: 300,
         maxWidth: 300
+    },
+    toppingList: {
+        // very dark grey background
+        backgroundColor: '#1c1c1c',
+        // add some padding
+        padding: 10,
+        // add some margin
+        margin: 10,
+        flexGrow: 0,
+        maxHeight: 300,
+        minHeight: 300,
+        minWidth: 300,
+        maxWidth: 300,
+    },
+    toppingRow: {
+        // clear background
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        // add some padding
+        paddingBottom: 15,
+    },
+    toppingText: {
+        fontSize: 20,
+        color: 'white',
+        fontFamily: 'Arial',
+        // add some padding
+        paddingLeft: 10,
     },
     userName: {
         fontSize: 16,
@@ -122,5 +151,18 @@ export default StyleSheet.create({
         width: 160,
         height: 160,
         marginBottom: 20,
-    }
+    },
+    checkboxBase: {
+        width: 24,
+        height: 24,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        borderWidth: 2,
+        borderColor: '#9E3737',
+        backgroundColor: 'transparent',
+      },
+      checkboxChecked: {
+        backgroundColor: '#9E3737',
+      },
 });
