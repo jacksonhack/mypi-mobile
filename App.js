@@ -7,6 +7,8 @@ import HomeScreen from './src/screens/HomeScreen.js';
 import AdminScreen from './src/screens/AdminScreen.js';
 import style from './style/style.js';
 import MemberScreen from './src/screens/MemberScreen.js';
+import MemberConfirmationScreen from './src/screens/MemberConfirmationScreen.js';
+import OrderOverviewScreen from './src/screens/OrderOverviewScreen.js';
 
 function DetailsScreen({ navigation }) {
   return (
@@ -65,11 +67,37 @@ function App() {
           headerStyle: {
             backgroundColor: '#000000',
           },
+          gestureEnabled: false,
           headerBackVisible: false,
         }}/>
         <Stack.Screen
         name="Member Screen"
         component={MemberScreen}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#000000',
+          },
+          headerBackTitle : 'Back',
+          headerBackTitleStyle: {
+            fontfaimly: 'Arial',
+            fontSize: 20,
+          }
+        }}/>
+        <Stack.Screen
+        name="Member Confirmation Screen"
+        component={MemberConfirmationScreen}
+        options={{
+          title: '',
+          gestureEnabled: false,
+          headerStyle: {
+            backgroundColor: '#000000',
+          },
+          headerBackVisible: false,
+        }}/>
+        <Stack.Screen
+        name="Order Overview Screen"
+        component={OrderOverviewScreen}
         options={{
           title: '',
           headerStyle: {

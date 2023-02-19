@@ -18,14 +18,14 @@ function AdminScreen({ navigation }) {
                 <Text style = {style.userName}>Baru</Text>
                 <Text style = {style.userName}>John Doe</Text>
                 <Text style = {style.userName}>Badri Vellambi</Text>
-                <Text style = {style.userName}>LongFirstName McLongLastName</Text>
+                <Text style = {style.userName}>FirstName LongLastName</Text>
             </ScrollView>
         </View>
         <Pressable style={style.yellowButton} onPress={() => 
         Alert.alert('Are you sure you want to generate the order?', 'No more users will be able to join.', [
             {text: 'Cancel', style: 'cancel'},
             {text: 'Generate', onPress: () => {
-                navigation.navigate('Details');
+                navigation.navigate('Order Overview Screen');
             }},
             ])
         }>

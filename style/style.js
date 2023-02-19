@@ -65,7 +65,7 @@ export default StyleSheet.create({
         paddingLeft: 10,
     },
     userName: {
-        fontSize: 16,
+        fontSize: 20,
         color: 'white',
         fontFamily: 'Arial',
         // align the text to the left
@@ -127,6 +127,9 @@ export default StyleSheet.create({
         width: 400,
         marginTop: 20,
         marginBottom: 20,
+        // add some padding
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     subtitle: {
         fontSize: 20,
