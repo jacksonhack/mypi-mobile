@@ -7,19 +7,24 @@ import style from '../../style/style.js';
 // Displays room code at the top of the screen
 
 function AdminScreen({ route, navigation }) {
-    const { orderID } = route.params;
+    let { order_object } = route.params;
+    // update members list array to have a placeholder list of users
+    order_object.members = ["Jackson", "Baru", "Badri", "FirstName LongLastName", "These are placeholders"];
+
     return (
+        // TODO: live update the list of users (poll at a certain interval?)
+        // TODO: get user names from the server (either get them using the user ID, or change server to return list of names instead of IDs)
+        // for now, assuming that the server returns a list of names, and using placeholder names
       <View style = {style.background}>
-        <Text style = {style.title}>Room Code: {orderID}</Text>
+        <Text style = {style.title}>Order ID: {order_object.room_code}</Text>
+        <Text style = {style.alt_title}>Order Name: {order_object.room_name}</Text>
         <Text style = {style.subtitle}>Share this code with everyone!</Text>
         <View style = {style.userListContainer}>
-            <Text style = {style.usersHeader}>5 users with preferences:</Text>
+            <Text style = {style.usersHeader}>{order_object.members.length} users with preferences:</Text>
             <ScrollView style = {style.userList}>
-                <Text style = {style.userName}>Jackson</Text>
-                <Text style = {style.userName}>Baru</Text>
-                <Text style = {style.userName}>John Doe</Text>
-                <Text style = {style.userName}>Badri Vellambi</Text>
-                <Text style = {style.userName}>FirstName LongLastName</Text>
+                {order_object.members.map((user) => (
+                    <Text style = {style.userName}>{user}</Text>
+                ))}
             </ScrollView>
         </View>
         <Pressable style={style.yellowButton} onPress={() => 

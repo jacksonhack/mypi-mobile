@@ -30,8 +30,8 @@ export default StyleSheet.create({
         // add some margin
         margin: 10,
         flexGrow: 0,
-        maxHeight: 300,
-        minHeight: 300,
+        maxHeight: 250,
+        minHeight:250,
         minWidth: 300,
         maxWidth: 300
     },
@@ -130,6 +130,19 @@ export default StyleSheet.create({
         // add some padding
         paddingLeft: 10,
         paddingRight: 10,
+    },
+    alt_title: {
+        fontSize: 30,
+        color: '#9E3737',
+        fontFamily: 'Arial',
+        // center the text
+        textAlign: 'center',
+        // limit the width of the text
+        width: 400,
+        // add some padding
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginBottom: 20,
     },
     subtitle: {
         fontSize: 20,

@@ -23,6 +23,12 @@ function HomeScreen({ navigation }) {
       return;
     }
 
+    // if order name is more than 26 characters, alert user and return
+    if (orderName.length > 26) {
+      Alert.alert('Order name must be less than 26 characters.');
+      return;
+    }
+
     // create order and navigate to admin screen
     createOrderAndNavigate(navigation);
     setVisible(false);
@@ -77,10 +83,10 @@ function HomeScreen({ navigation }) {
     }
 
     // get orderID
-    let orderID = response.room_code;
+    //let orderID = response.room_code;
 
     // navigate to admin screen
-    navigation.navigate('Admin Screen', { orderID: orderID });
+    navigation.navigate('Admin Screen', { order_object: response });
   }
 
   // function to create an order
