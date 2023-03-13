@@ -6,10 +6,11 @@ import style from '../../style/style.js';
 // shows all users in the order and allows admin to generate the order
 // Displays room code at the top of the screen
 
-function AdminScreen({ navigation }) {
+function AdminScreen({ route, navigation }) {
+    const { orderID } = route.params;
     return (
       <View style = {style.background}>
-        <Text style = {style.title}>Room Code: 123456</Text>
+        <Text style = {style.title}>Room Code: {orderID}</Text>
         <Text style = {style.subtitle}>Share this code with everyone!</Text>
         <View style = {style.userListContainer}>
             <Text style = {style.usersHeader}>5 users with preferences:</Text>
