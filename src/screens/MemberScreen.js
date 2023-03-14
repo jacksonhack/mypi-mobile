@@ -8,10 +8,11 @@ import ToppingRow from './components/ToppingRow.js';
 // text input for name
 // submit button
 
-function MemberScreen({ navigation }) {
+function MemberScreen({ route, navigation }) {
+    let { order_object, toppings_list } = route.params;
     return (
         <View style={style.background}>
-            <Text style={style.title}>Room Code: 123456</Text>
+            <Text style={style.title}>Order: {order_object.room_name}</Text>
             <Text style={style.subtitle}>Please enter your name and select the toppings that you like.</Text>
             <TextInput style={style.textInput}
                 placeholder='Enter Your Name'
@@ -20,16 +21,10 @@ function MemberScreen({ navigation }) {
             </TextInput>
             <View style={style.userListContainer}>
                 <ScrollView style={style.toppingList}>
-                    <ToppingRow text='Pepperoni' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Sausage' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Mushrooms' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Onions' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Bacon' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Black Olives' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Green Peppers' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Pineapple' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Spinach' checked={false} onValueChange={() => { }} />
-                    <ToppingRow text='Tomatoes' checked={false} onValueChange={() => { }} />
+                    {toppings_list.map((topping) => (
+                        // set text to the topping name with first letter of each word capitalized
+                        <ToppingRow key = {topping.topping_name} text={topping.topping_name.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} checked={false} onValueChange={() => { }} />
+                    ))}
                 </ScrollView>
             </View>
             <Pressable style={style.redButton} onPress={() =>

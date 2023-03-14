@@ -23,7 +23,7 @@ function AdminScreen({ route, navigation }) {
             <Text style = {style.usersHeader}>{order_object.members.length} users with preferences:</Text>
             <ScrollView style = {style.userList}>
                 {order_object.members.map((user) => (
-                    <Text style = {style.userName}>{user}</Text>
+                    <Text key= {user} style = {style.userName}>{user}</Text>
                 ))}
             </ScrollView>
         </View>

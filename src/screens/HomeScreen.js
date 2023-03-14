@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, TextInput, Image, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
+import { View, Text, Pressable, TextInput, Image, Keyboard, TouchableWithoutFeedback, Alert, ActivityIndicator } from 'react-native';
 import style from '../../style/style.js';
 import { API_ROOT } from '../constants/constants.js';
 import Dialog from 'react-native-dialog';
@@ -7,6 +7,7 @@ import Dialog from 'react-native-dialog';
 function HomeScreen({ navigation }) {
   const [visible, setVisible] = React.useState(false);
   const [orderName, setOrderName] = React.useState('');
+  let [orderID, setOrderID] = React.useState('');
 
   const showDialog = () => {
     setVisible(true);
@@ -30,7 +31,7 @@ function HomeScreen({ navigation }) {
     }
 
     // create order and navigate to admin screen
-    createOrderAndNavigate(navigation);
+    createOrderAndNavigate();
     setVisible(false);
   }
 
@@ -45,12 +46,13 @@ function HomeScreen({ navigation }) {
           style={style.textInput}
           placeholder="Enter Order ID"
           placeholderTextColor="grey"
-          keyboardType='numeric'
           maxLength={10}
+          onChangeText={newText => setOrderID(newText)}
         >
         </TextInput>
-        <Pressable style={style.yellowButton} onPress={() => navigation.navigate('Member Screen')}>
-          <Text style={style.buttonText}>Join Order</Text>
+        <Pressable style={style.yellowButton} onPress={() => joinOrderAndNavigate()}>
+          <Text style={style.buttonText}
+          >Join Order</Text>
         </Pressable>
         <Pressable style={style.redButton} onPress={showDialog}>
           <Text style={style.buttonText}>Create Order</Text>
@@ -69,8 +71,47 @@ function HomeScreen({ navigation }) {
     </TouchableWithoutFeedback>
   );
 
+  // function to join an order and navigate to the member screen
+  // hits api to validate orderID (get order from orderID code), if valid, navigate to member screen with order response in params
+  // also hits toppings api to get toppings list and pass it to member screen
+  async function joinOrderAndNavigate() {
+
+    // log orderID
+    console.log(orderID);
+
+    // make sure orderID is not empty
+    if (orderID === '') {
+      Alert.alert('Please enter an order ID.');
+      return;
+    }
+
+    // convert orderID to uppercase
+    orderID = orderID.toUpperCase();
+
+    const allData = await Promise.all([validateOrderID(), getToppings()]);
+    
+    // print allData
+    console.log(allData);
+
+    // check if error in either response, alert and return if so
+    if (allData[0].error || !allData[0].room_id) {
+      Alert.alert('Error', 'There was an error joining the order. Please check your order ID and try again.');
+      return;
+    }
+
+    if (allData[1].error) {
+      Alert.alert('Error', 'There was an error getting the toppings list. Please try again.');
+      return;
+    }
+
+
+    // navigate to member screen
+    navigation.navigate('Member Screen', { order_object: allData[0], toppings_list: allData[1] });
+    
+  }
+
   // function to create an order and navigate to the admin screen with orderID in params
-  async function createOrderAndNavigate(navigation) {
+  async function createOrderAndNavigate() {
 
     // create order
     let response = await createOrder();
@@ -87,6 +128,41 @@ function HomeScreen({ navigation }) {
 
     // navigate to admin screen
     navigation.navigate('Admin Screen', { order_object: response });
+  }
+
+  // function to get toppings list from api
+  async function getToppings() {
+    // get toppings
+    return fetch(API_ROOT + '/toppings', {
+      method: 'GET',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        return json;
+      })
+      .catch((error) => {
+        return { error: error };
+      });
+  }
+
+  // function to validate orderID (return order from orderID code)
+  async function validateOrderID() {
+    return fetch(API_ROOT + '/order/code/' + orderID, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        return json;
+      })
+      .catch((error) => {
+        return { error: error };
+      });
   }
 
   // function to create an order
