@@ -84,7 +84,24 @@ function MemberScreen({ route, navigation }) {
                     let response = await createUser(usr, topp);
                     console.log(response);
 
-                    navigation.navigate('Member Confirmation Screen')
+                    // if error, alert and return
+                    if (response.error) {
+                        Alert.alert('Error: your preferences were not saved. Please try again.');
+                        return;
+                    }
+
+                    // if not, patch order with new user id
+                    let order_response = await patchOrder(order_object.room_id, response.user_id);
+
+                    // if response contains user_id in members, navigate to member confirmation screen
+                    if (order_response.members.includes(response.user_id)) {
+                        navigation.navigate('Member Confirmation Screen')
+                    }
+                    // else, alert that there was an error
+                    else {
+                        Alert.alert('Error: your preferences may not have been saved. Please try again.');
+                        return;
+                    }
                 }
             },
         ])
@@ -116,6 +133,30 @@ function MemberScreen({ route, navigation }) {
             return json;
         }
         )
+        .catch((error) => 
+        {
+            return { error: error };
+        }
+        );
+    }
+
+    // hit api to patch order with new user id, return response
+    async function patchOrder(order_id, user_id) {
+        let body = {
+            "members": [user_id]
+        }
+
+        return response = await fetch(API_ROOT + '/order/add_member/' + order_id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            return json;
+        })
         .catch((error) => 
         {
             return { error: error };
