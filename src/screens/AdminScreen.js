@@ -12,13 +12,14 @@ function AdminScreen({ route, navigation }) {
     // update members list array to have a placeholder list of users
     //order_object.members = ["Jackson", "Baru", "Badri", "FirstName LongLastName", "These are placeholders"];
 
-    const [members, setMembers] = React.useState(order_object.members);
+    const [userNames, setUserNames] = React.useState(order_object.members);
 
     // print order_object to console
-    console.log(order_object.room_id);
+    //console.log(order_object.room_id);
 
     // use useEffect to update members list array every 10 seconds
     React.useEffect(() => {
+
         async function getMembers() {
             fetch(API_ROOT + '/order/' + order_object.room_id, {
                 method: 'GET',
@@ -27,14 +28,48 @@ function AdminScreen({ route, navigation }) {
                 },
             })
                 .then((response) => response.json())
-                .then((json) => {
+                .then(async (json) => {
                     console.log(json.members);
                     
                     // if not error, update members list array
-                    if(json.members) {
-                        setMembers(json.members);
+                    // and if members list is not empty, update members list array
+                    if(json.members && json.members.length > 0) {
+                        let memberIDs = json.members;
+                        // members will be an array of user IDs, need to get names using users endpoint
+                        users = await getUserNames(memberIDs);
+
+                        console.log(JSON.stringify(users));
+                        
+                        // if list is not empty, update userNames list array
+                        if (users.length > 0) {
+                            // grab username field from each user object
+                            let userNames = users.map((user) => user.username);
+
+                            setUserNames(userNames);
+                        }
+                        // otherwise, just let it ride as is until the next update
                     }
                 });
+        }
+
+        // function to get user names from user IDs
+        async function getUserNames(memberIDs) {
+
+            return response = await fetch(API_ROOT + '/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(memberIDs)
+            })
+            .then((response) => response.json())
+            .then((json) => {
+                return json;
+            })
+            .catch((error) =>
+            {
+                return { error: error };
+            });
         }
 
         getMembers();
@@ -52,9 +87,9 @@ function AdminScreen({ route, navigation }) {
             <Text style={style.alt_title}>Order Name: {order_object.room_name}</Text>
             <Text style={style.subtitle}>Share this code with everyone!</Text>
             <View style={style.userListContainer}>
-                <Text style={style.usersHeader}>{members.length} users with preferences:</Text>
+                <Text style={style.usersHeader}>{userNames.length} users with preferences:</Text>
                 <ScrollView style={style.userList}>
-                    {members.map((user) => (
+                    {userNames.map((user) => (
                         <Text key={user} style={style.userName}>{user}</Text>
                     ))}
                 </ScrollView>
