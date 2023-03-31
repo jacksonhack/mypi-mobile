@@ -98,59 +98,25 @@ function AdminScreen({ route, navigation }) {
                     { text: 'Cancel', style: 'cancel' },
                     {
                         text: 'Generate', onPress: async () => {
+                            // if members list is empty, show an error message
+                            if (userNames.length == 0) {
+                                Alert.alert('Error', 'There are no users in the order. Please try again once members join.');
+                                return;
+                            }
+
                             // on press, hit the confirm order endpoint to generate the order
                             let response = await generateOrder(order_object.room_id);
 
                             console.log(response);
 
-                            // if the response is an error or the pizza_order field and members field are empty, show an error message
-                            if (response.error || (response.pizza_order.length == 0 && response.members.length == 0)) {
+                            // if the response is an error or the pizza_order field is empty, show an error message
+                            if (response.error || response.pizza_order.length == 0) {
                                 Alert.alert('Error', 'There was an error generating the order. Please try again.');
                                 return;
                             }
 
-                            // otherwise, hit the users endpoint to get a mappping of user IDs to names
-                            let users_response = await getUserNames(response.members);
-
-                            console.log(users_response);
-
-                            // if the response is an error or the user list is empty, show an error message
-                            if (users_response.error || users_response.length == 0) {
-                                Alert.alert('Error', 'There was an error generating the order. Please try again.');
-                                return;
-                            }
-                            
-                            // otherwise, construct a mapping of user IDs to user names
-                            let user_id_to_name = {};
-
-                            for (let i = 0; i < users_response.length; i++) {
-                                user_id_to_name[users_response[i].user_id] = users_response[i].username;
-                            }
-
-                            console.log(user_id_to_name);
-
-                            // get the entire list of toppings and construct a mapping of topping IDs to topping names
-                            let toppings_response = await getToppings();
-
-                            console.log(toppings_response);
-
-                            // if the response is an error or the topping list is empty, show an error message
-                            if (toppings_response.error || toppings_response.length == 0) {
-                                Alert.alert('Error', 'There was an error generating the order. Please try again.');
-                                return;
-                            }
-
-                            // otherwise, construct a mapping of topping IDs to topping names
-                            let topping_id_to_name = {};
-
-                            for (let i = 0; i < toppings_response.length; i++) {
-                                topping_id_to_name[toppings_response[i].topping_id] = toppings_response[i].topping_name;
-                            }
-
-                            console.log(topping_id_to_name);
-
-                            // then, navigate to the order overview screen, passing in the order object, user ID to name mapping, and topping ID to name mapping
-                            navigation.navigate('Order Overview Screen', { order_object: response, user_id_to_name: user_id_to_name, topping_id_to_name: topping_id_to_name });
+                            // then, navigate to the order overview screen, passing in the order object
+                            navigation.navigate('Order Overview Screen', { order_object: response });
                         }
                     },
                 ])
@@ -174,8 +140,8 @@ function AdminScreen({ route, navigation }) {
 
     async function generateOrder(order_id) {
         // hit the /order/confirm endpoint to generate the order
-        return fetch(MOCK_API_ROOT + '/order/confirm/' + order_id, {
-            method: 'GET',
+        return fetch(API_ROOT + '/order/confirm/' + order_id, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -189,46 +155,46 @@ function AdminScreen({ route, navigation }) {
         });
     }
 
-    // function to get user names from user IDs
-    async function getUserNames(memberIDs) {
+    // // function to get user names from user IDs
+    // async function getUserNames(memberIDs) {
 
-        // print the member IDs
-        console.log(memberIDs);
+    //     // print the member IDs
+    //     console.log(memberIDs);
 
-        return response = await fetch(API_ROOT + '/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(memberIDs)
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            return json;
-        })
-        .catch((error) =>
-        {
-            return { error: error };
-        });
-    }
+    //     return response = await fetch(API_ROOT + '/users', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(memberIDs)
+    //     })
+    //     .then((response) => response.json())
+    //     .then((json) => {
+    //         return json;
+    //     })
+    //     .catch((error) =>
+    //     {
+    //         return { error: error };
+    //     });
+    // }
 
-    // function to get toppings list from api
-    async function getToppings() {
-        // get toppings
-        return fetch(API_ROOT + '/toppings', {
-        method: 'GET',
-        headers: { 
-            'Content-Type': 'application/json',
-        },
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            return json;
-        })
-        .catch((error) => {
-            return { error: error };
-        });
-    }
+    // // function to get toppings list from api
+    // async function getToppings() {
+    //     // get toppings
+    //     return fetch(API_ROOT + '/toppings', {
+    //     method: 'GET',
+    //     headers: { 
+    //         'Content-Type': 'application/json',
+    //     },
+    //     })
+    //     .then((response) => response.json())
+    //     .then((json) => {
+    //         return json;
+    //     })
+    //     .catch((error) => {
+    //         return { error: error };
+    //     });
+    // }
 
 }
 

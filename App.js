@@ -102,6 +102,7 @@ function App() {
           title: '',
           headerStyle: {
             backgroundColor: '#000000',
+            headerBackVisible: false,
           },
           headerBackTitle : 'Back',
           headerBackTitleStyle: {
