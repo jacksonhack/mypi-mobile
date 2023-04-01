@@ -35,6 +35,17 @@ export default StyleSheet.create({
         minWidth: 300,
         maxWidth: 300
     },
+    pizzaList: {
+        // dark grey background
+        backgroundColor: '#1c1c1c',
+        // add some margin
+        margin: 10,
+        flexGrow: 0,
+        maxHeight: 300,
+        minHeight:250,
+        minWidth: 300,
+        maxWidth: 300
+    },
     toppingList: {
         // very dark grey background
         backgroundColor: '#1c1c1c',
@@ -181,4 +192,31 @@ export default StyleSheet.create({
       checkboxChecked: {
         backgroundColor: '#9E3737',
       },
+      pizza_topping_text: {
+        fontSize: 20,
+        color: 'white',
+        fontFamily: 'Arial',
+        // align the text to the left
+        textAlign: 'left',
+
+        // bold the text
+        fontWeight: 'bold',
+    },
+    pizza_scroll_container: {
+        // clear background
+        backgroundColor: 'transparent',
+        // add 20 pixels of left and right padding
+        paddingLeft: 20,
+        paddingRight: 20,
+        // add some vertical padding
+        paddingTop: 10,
+        paddingBottom: 5,
+    },
+    pizza_user_text: {
+        fontSize: 15,
+        color: 'white',
+        fontFamily: 'Arial',
+        // align the text to the left
+        textAlign: 'left',
+    },
 });

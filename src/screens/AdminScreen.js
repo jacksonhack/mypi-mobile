@@ -115,6 +115,123 @@ function AdminScreen({ route, navigation }) {
                                 return;
                             }
 
+                            // placeholder data for testing
+                            // let response = {
+                            //     "room_name": "Jackson’s order",
+                            //     "room_owner": "placeholder",
+                            //     "room_id": "2671e740-4122-4049-8aea-4af425169dff",
+                            //     "room_code": "GGFNTE",
+                            //     "members": [
+                            //         "819ae288-38b1-460d-8cf1-e5f8c1378a87",
+                            //         "09941089-c284-4866-9d6f-4b6dc737fe81"
+                            //     ],
+                            //     "pizza_order": [
+                            //         {
+                            //             "toppings": [
+                            //                 {
+                            //                     "topping_name": "sausage",
+                            //                     "topping_id": "0539d964-c5ca-48e5-be8a-bee112475535"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "bacon",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 }
+                            //             ],
+                            //             "users": [
+                            //                 "alex",
+                            //                 "jackson",
+                            //                 "hawkins"
+                            //             ]
+                            //         },
+                            //         {
+                            //             "toppings": [
+                            //                 {
+                            //                     "topping_name": "pepperoni",
+                            //                     "topping_id": "0539d964-c5ca-48e5-be8a-bee112475535"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "bacon",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "onion",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 }
+                            //             ],
+                            //             "users": [
+                            //                 "baru",
+                            //                 "badri"
+                            //             ]
+                            //         },
+                            //         {
+                            //             "toppings": [
+                            //                 {
+                            //                     "topping_name": "olive",
+                            //                     "topping_id": "0539d964-c5ca-48e5-be8a-bee112475535"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "pepper",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "onion",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 }
+                            //             ],
+                            //             "users": [
+                            //                 "vegetarian 1",
+                            //                 "vegetarian 2",
+                            //                 "vegetarian 3"
+                            //             ]
+                            //         },
+                            //         {
+                            //             "toppings": [
+                            //                 {
+                            //                     "topping_name": "bacon",
+                            //                     "topping_id": "0539d964-c5ca-48e5-be8a-bee112475535"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "sausage",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "pepperoni",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 }
+                            //             ],
+                            //             "users": [
+                            //                 "meat lover 1",
+                            //                 "meat lover 2",
+                            //                 "meat lover 3",
+                            //                 "meat lover 4",
+                            //                 "meat lover 5",
+                            //                 "meat lover 6"
+                            //             ]
+                            //         },
+                            //         {
+                            //             "toppings": [
+                            //                 {
+                            //                     "topping_name": "ham",
+                            //                     "topping_id": "0539d964-c5ca-48e5-be8a-bee112475535"
+                            //                 },
+                            //                 {
+                            //                     "topping_name": "pineapple",
+                            //                     "topping_id": "2bdf7de5-d890-4ccb-94ff-5599135a0063"
+                            //                 }
+                            //             ],
+                            //             "users": [
+                            //                 "hawaiian 1",
+                            //                 "hawaiian 2",
+                            //                 "hawaiian 3",
+                            //                 "hawaiian 4"
+                            //             ]
+                            //         }
+                            //     ]
+                            // }
+
+                            //console.log(response);
+
+
                             // then, navigate to the order overview screen, passing in the order object
                             navigation.navigate('Order Overview Screen', { order_object: response });
                         }

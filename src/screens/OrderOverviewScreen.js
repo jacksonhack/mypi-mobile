@@ -5,22 +5,42 @@ import style from '../../style/style.js';
 
 // Shows a list of the izzas to be ordered and quantity of each
 
-function OrderOverviewScreen({ navigation }) {
+function OrderOverviewScreen({ route, navigation }) {
+    let { order_object } = route.params;
+
+    let pizza_order = order_object.pizza_order;
+
     return(
         <View style = {style.background}>
             <Text style = {style.title}>Order Overview</Text>
             <Text style = {style.subtitle}>You should order the following Pizzas:</Text>
             <View style = {style.userListContainer}>
-                <ScrollView style = {style.userList}>
-                    <Text style = {style.userName}>1 Pepperoni</Text>
-                    <Text style = {style.userName}>2 Mushroom and Onion</Text>
-                    <Text style = {style.userName}>1 Ham and Pineapple</Text>
-                    <Text style = {style.userName}>3 Sausage</Text>
-                    <Text style = {style.userName}>1 Cheese</Text>
-                    <Text style = {style.userName}>1 Bacon</Text>
-                    <Text style = {style.userName}>1 Chicken</Text>
-                    <Text style = {style.userName}>4 Pineapple</Text>
-                    <Text style = {style.userName}>1 Ham</Text>
+                <ScrollView style = {style.pizzaList}>
+                    {pizza_order.map((pizza) => (
+                        // pizza object has the following fields:
+                        // toppings: list of topping objects with topping_name and topping_id
+                        // users: list of strings of usernames
+
+                        // instead of displaying it all on one line, try a view component with toppings on one line and "for" users on another
+                        <View key = {
+                            // make the key a string concatenation of topping ids
+                            pizza.toppings.map((topping) => topping.topping_id).join('')
+                        } style = {style.pizza_scroll_container}>
+                            <Text style = {style.pizza_topping_text}> 
+                            {
+                            // number of this pizza to order is the number of users divided by 2, rounded up
+                            Math.ceil(pizza.users.length / 2) + ' '
+                            } 
+                            {
+                            pizza.toppings.map((topping) => topping.topping_name).join(', ').replace(/\b\w/g, l => l.toUpperCase())}
+                            {
+                            // make the word "Pizza" plural if there are more than one
+                            Math.ceil(pizza.users.length / 2) > 1 ? ' Pizzas' : ' Pizza'
+                            }
+                            </Text>
+                            <Text style = {style.pizza_user_text}>For {pizza.users.join(', ')}</Text>
+                        </View>
+                    ))}
                 </ScrollView>
             </View>
             <Pressable style={style.yellowButton} onPress={() => 
@@ -31,7 +51,12 @@ function OrderOverviewScreen({ navigation }) {
             }>
                 <Text style={style.buttonText}>Place Order</Text>
             </Pressable>
-            <Pressable style={style.redButton} onPress={() => navigation.navigate('Home')}>
+            <Pressable style={style.redButton} onPress={() => 
+            Alert.alert('Are you sure you want to exit?', 'Your order will be lost.', [
+                {text: 'Cancel', style: 'cancel'},
+                {text: 'Exit', onPress: () => navigation.navigate('Home')},
+            ])
+            }>
                 <Text style={style.buttonText}>Exit</Text>
             </Pressable>
         </View>

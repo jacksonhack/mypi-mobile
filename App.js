@@ -102,13 +102,8 @@ function App() {
           title: '',
           headerStyle: {
             backgroundColor: '#000000',
-            headerBackVisible: false,
           },
-          headerBackTitle : 'Back',
-          headerBackTitleStyle: {
-            fontfaimly: 'Arial',
-            fontSize: 20,
-          }
+          headerBackVisible: false,
         }}/>
       </Stack.Navigator>
     </NavigationContainer>
