@@ -10,6 +10,9 @@ function OrderOverviewScreen({ route, navigation }) {
 
     let pizza_order = order_object.pizza_order;
 
+    // delete any pizzas with no users
+    pizza_order = pizza_order.filter((pizza) => pizza.users.length > 0);
+
     return(
         <View style = {style.background}>
             <Text style = {style.title}>Order Overview</Text>
